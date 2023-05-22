@@ -8,6 +8,7 @@ api_key = os.getenv('YT_API_KEY')
 
 youtube = build('youtube', 'v3', developerKey=api_key)
 
+
 class Channel:
     """Класс для ютуб-канала"""
 
