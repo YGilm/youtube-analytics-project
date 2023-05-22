@@ -1,9 +1,13 @@
+import os
+from dotenv import load_dotenv
 # Импортируем build из googleapiclient.discovery позволяет создавать объекты для взаимодействия с YouTube API.
 from googleapiclient.discovery import build
+load_dotenv()
 # задаем переменную нашего ключа API
-api_key = 'AIzaSyB8POPmjxYmRTuiLedpJXS95r_XzuWObiM'
+api_key: str = os.getenv('YT_API_KEY')
 # перемменная позволяет создавать объекты для взаимодействия с YouTube API
 youtube = build('youtube', 'v3', developerKey=api_key)
+
 
 class Channel:
     """Класс для ютуб-канала"""
