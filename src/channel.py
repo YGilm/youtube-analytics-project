@@ -1,8 +1,11 @@
-# Импортируем build из googleapiclient.discovery позволяет создавать объекты для взаимодействия с YouTube API.
 from googleapiclient.discovery import build
-# задаем переменную нашего ключа API
-api_key = 'AIzaSyB8POPmjxYmRTuiLedpJXS95r_XzuWObiM'
-# перемменная позволяет создавать объекты для взаимодействия с YouTube API
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Загрузка переменных среды из файла .env
+
+api_key = os.getenv('YT_API_KEY')
+
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 class Channel:
@@ -34,40 +37,11 @@ class Channel:
             self._video_count = int(item['statistics'].get('videoCount', 0))
             self._view_count = int(item['statistics'].get('viewCount', 0))
 
-    @property
-    def title(self):
-        """Возвращает название канала."""
-        return self._title
-
-    @property
-    def description(self):
-        """Возвращает описание канала."""
-        return self._description
-
-    @property
-    def url(self):
-        """Возвращает ссылку на канал."""
-        return self._url
-
-    @property
-    def subscriber_count(self):
-        """Возвращает количество подписчиков канала."""
-        return self._subscriber_count
-
-    @property
-    def video_count(self):
-        """Возвращает количество видео на канале."""
-        return self._video_count
-
-    @property
-    def view_count(self):
-        """Возвращает общее количество просмотров канала."""
-        return self._view_count
-
-    @classmethod
-    def get_service(cls):
-        """Возвращает объект для работы с YouTube API."""
-        return youtube
-
-    def to_json(self, filename):
-        """Сохраняет значения атрибутов экземпляра Channel в файл в формате"""
+    def print_info(self):
+        """Выводит информацию о канале на консоль."""
+        print(f"Название канала: {self._title}")
+        print(f"Описание канала: {self._description}")
+        print(f"Ссылка на канал: {self._url}")
+        print(f"Количество подписчиков: {self._subscriber_count}")
+        print(f"Количество видео: {self._video_count}")
+        print(f"Общее количество просмотров: {self._view_count}")
