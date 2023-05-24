@@ -1,11 +1,11 @@
 from googleapiclient.discovery import build
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()  # Загрузка переменных среды из файла .env
 
 api_key = os.getenv('YT_API_KEY')
-
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 
@@ -46,3 +46,37 @@ class Channel:
         print(f"Количество подписчиков: {self._subscriber_count}")
         print(f"Количество видео: {self._video_count}")
         print(f"Общее количество просмотров: {self._view_count}")
+
+    @classmethod
+    def get_service(cls):
+        """Возвращает объект для работы с YouTube API."""
+        return youtube
+
+    def to_json(self, file_path):
+        """Сохраняет значения атрибутов экземпляра Channel в JSON-файл."""
+        data = {
+            'id': self._channel_id,
+            'title': self._title,
+            'description': self._description,
+            'url': self._url,
+            'subscriber_count': self._subscriber_count,
+            'video_count': self._video_count,
+            'view_count': self._view_count
+        }
+        with open(file_path, 'w') as file:
+            json.dump(data, file)
+
+    @property
+    def title(self):
+        """Возвращает название канала."""
+        return self._title
+
+    @property
+    def video_count(self):
+        """Возвращает количество видео на канале."""
+        return self._video_count
+
+    @property
+    def url(self):
+        """Возвращает ссылку на канал."""
+        return self._url
