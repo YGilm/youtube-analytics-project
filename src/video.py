@@ -22,7 +22,11 @@ class Video:
         self._url = None
         self._view_count = None
         self._like_count = None
-        self._fetch_video_data()
+
+        try:
+            self._fetch_video_data()
+        except IndexError:
+            print('Видео не найдено')
 
     def _fetch_video_data(self):
         """
@@ -47,6 +51,14 @@ class Video:
         :return: Строковое представление экземпляра класса Video.
         """
         return self._title
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def like_count(self):
+        return self._like_count
 
 
 class PLVideo(Video):
