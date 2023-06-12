@@ -52,6 +52,14 @@ class Video:
         """
         return self._title
 
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def like_count(self):
+        return self._like_count
+
 
 class PLVideo(Video):
     """Класс для видео в плейлисте"""
