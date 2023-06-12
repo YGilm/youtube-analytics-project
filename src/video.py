@@ -22,7 +22,11 @@ class Video:
         self._url = None
         self._view_count = None
         self._like_count = None
-        self._fetch_video_data()
+
+        try:
+            self._fetch_video_data()
+        except IndexError:
+            print('Видео не найдено')
 
     def _fetch_video_data(self):
         """
